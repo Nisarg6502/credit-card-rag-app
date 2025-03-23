@@ -1,4 +1,5 @@
 import json
+import asyncio
 import os
 import logging
 from flask import Flask, request, jsonify
@@ -30,7 +31,7 @@ except FileNotFoundError:
 except json.JSONDecodeError:
     raise ValueError("The file 'data/credit_card_benefits.json' contains invalid JSON.")
 
-def call_gemini_api(prompt: str) -> str:
+async def _call_gemini_api_async(prompt: str) -> str:
     """
     Calls the Gemini 2.0 Flash API with the provided prompt.
     """
@@ -42,7 +43,7 @@ def call_gemini_api(prompt: str) -> str:
 
     logging.info(f"Calling Gemini API with prompt: {prompt}")
     try:
-        response = client.models.generate_content(
+        response = await client.aio.models.generate_content(
             model="gemini-2.0-flash",
             contents=prompt,
             config=types.GenerateContentConfig(
@@ -66,6 +67,22 @@ def call_gemini_api(prompt: str) -> str:
         return response.text
     except Exception as e:
         raise Exception(f"Error calling Gemini API: {e}")
+
+def call_gemini_api(prompt: str) -> str:
+    """
+    Synchronous wrapper that creates an event loop and runs the async function.
+    """
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        # Run the async function until it completes
+        result = loop.run_until_complete(_call_gemini_api_async(prompt))
+        return result
+    except Exception as e:
+        raise Exception(f"Error calling Gemini API: {e}")
+    finally:
+        # Clean up the event loop
+        loop.close()
 
 @app.route("/recommend", methods=["POST"])
 def recommend_card():
