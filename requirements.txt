@@ -1,9 +1,6 @@
-faiss-cpu
-numpy
-sentence-transformers
-transformers
 fastapi
 uvicorn
+requests
 pydantic
 python-dotenv
-huggingface_hub
+google-genai
