@@ -1,6 +1,8 @@
-fastapi
+# fastapi
 uvicorn
 requests
 pydantic
 python-dotenv
 google-genai
+flask
+flask-cors

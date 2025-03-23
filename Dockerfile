@@ -19,8 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of your application code
 COPY . /app/
 
-# Expose port 8080 for Cloud Run (it will set $PORT=8080)
+# Expose port 8000 for Cloud Run
 EXPOSE 8000
 
-# Command to run your FastAPI app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Command to run your Flask app
+# We'll rely on main.py reading the PORT from the environment variable.
+CMD ["python", "main.py"]
