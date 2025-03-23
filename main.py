@@ -55,7 +55,7 @@ app.add_middleware(
 )
 
 
-def call_gemini_api(prompt: str) -> str:
+async def call_gemini_api(prompt: str) -> str:
     """
     Call the Gemini 2.0 Flash API with your prompt.
     Adjust the request body/headers based on the actual Gemini API spec.
@@ -75,7 +75,7 @@ def call_gemini_api(prompt: str) -> str:
     logging.info(f"Data as string: {data_as_string}")
 
     try:
-        response = client.models.generate_content(
+        response = await client.models.generate_content(
             model="gemini-2.0-flash",
             contents=prompt,
             config=types.GenerateContentConfig(
@@ -102,7 +102,7 @@ def call_gemini_api(prompt: str) -> str:
         raise HTTPException(status_code=500, detail=f"Error calling Gemini API: {e}")
 
 @app.post("/recommend")
-def recommend_card(request: QueryRequest):
+async def recommend_card(request: QueryRequest):
     """
     Endpoint that accepts a user query, injects the JSON data into the prompt,
     and returns a recommendation from Gemini 2.0 Flash.
@@ -114,7 +114,7 @@ def recommend_card(request: QueryRequest):
             f"User query: {request.query}\n"
             "Recommendation:"
         )
-        recommendation = call_gemini_api(prompt)
+        recommendation = await call_gemini_api(prompt)
         return {"recommendation": recommendation}
     except HTTPException as e:
         raise e
