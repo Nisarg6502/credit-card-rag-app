@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Ensures mobile responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credit Card Recommender</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+  <!-- Example: Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <div class="container mx-auto px-4 py-12 overflow-hidden">
+    <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">
+      Query Recommendation
+    </h1>
+
+    <div class="flex flex-col items-center">
+      <!-- Use flex-col on small screens and flex-row on >=sm screens -->
+      <div class="w-full max-w-md mx-auto justify-center flex flex-col sm:flex-row items-center">
+        <!-- Input + Mic in one row -->
+        <div class="flex flex-row w-full sm:w-auto">
+          <input type="text" id="queryInput" placeholder="Enter your query..." class="flex-grow px-4 py-2 border border-gray-300 focus:outline-none 
+                   focus:ring-2 focus:ring-blue-600 sm:rounded-l-lg sm:rounded-r-none" />
+          <button id="micBtn" class="px-3 py-2 bg-gray-100 border border-gray-300 hover:bg-gray-200 
+                   focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <!-- mic icon SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7
+                   m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 
+                   0v6a3 3 0 01-3 3z" />
+            </svg>
+          </button>
+        </div>
+      
+        <!-- Submit button -->
+        <button id="submitBtn" class="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white hover:bg-blue-700 
+                 focus:outline-none focus:ring-2 focus:ring-blue-600
+                 sm:rounded-r-lg sm:rounded-l-none mt-2 sm:mt-0">
+          Submit
+        </button></div>
+
+
+      <!-- Response container with copy button -->
+      <div id="responseContainer" class="relative mt-8 w-full max-w-md bg-gray-50 p-6 rounded shadow">
+        <div id="responseText"><!-- Response will appear here --></div>
+        <button id="copyBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" title="Copy text">
+          <!-- Copy icon SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2M16 8h2a2 2 0 012 2v8a2 2 0 01-2 2h-2M8 16l8-8" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
