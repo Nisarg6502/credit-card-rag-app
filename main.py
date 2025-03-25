@@ -60,6 +60,7 @@ async def _call_gemini_api_async(prompt: str) -> str:
                     Give answer as the recommended credit card along with simple explanation in short bullet points.
 
                     You will also mention why other cards are not recommended in a single sentence for each card.
+                    You will separate each newline by '<br>'.
                 """
             )
         )
